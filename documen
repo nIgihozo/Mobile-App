@@ -1,0 +1,12 @@
+Firebase
+
+const app = initializeApp(firebaseConfig);
+
+export const auth = (firebaseAuth as any).initializeAuth(app, {
+  persistence: (firebaseAuth as any).getReactNativePersistence(AsyncStorage)
+});
+
+
+On Board description 
+
+description: movie.title || movie.name, 

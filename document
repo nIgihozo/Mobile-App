@@ -1,0 +1,70 @@
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer my_token'
+  }
+};
+
+
+export const getTrendingMovies = async () => {
+    try {
+        const response = await fetch(`${BASE_URL}/trending/movie/day?api_key=${NEXT_PUBLIC_ACCESS_TOKEN}`);
+        const data = await response.json();
+        return data.results;
+    } catch (error) {
+        console.error('Token Error:', error);
+        return [];
+    }
+};
+
+
+
+const HomeScreen = () => {
+    const [trendingMovies, setTrendingMovies] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchMoviesData = async () => {
+      const data = await getTrendingMovies();
+      setTrendingMovies(data);
+      setIsLoading(false); 
+    }
+
+    fetchMoviesData();
+    }, []);
+
+
+
+
+
+
+import { View, Text } from 'react-native'
+import React from 'react'
+
+const SearchScreen = () => {
+    return (
+        <View>
+            <Text>SearchScreen</Text>
+        </View>
+    )
+}
+
+{/*Channel view*/}
+
+<ScrollView
+            horizontal showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.channelList}
+            >
+
+                <View style={styles.channelBox}>
+                    <Image source={require('../screen/assets/image/disnep2.png')} style={styles.channelLogo} resizeMode="contain"/>
+                </View>
+                <View style={styles.channelBox}>
+                    <Image source={require('../screen/assets/image/netflix.png')} style={styles.channelLogo} resizeMode="contain"/>
+                </View>
+                <View style={styles.channelBox}>
+                    <Image source={require('../screen/assets/image/prime.png')} style={styles.channelLogo} resizeMode="contain"/>
+                </View>
+
+            </ScrollView>
